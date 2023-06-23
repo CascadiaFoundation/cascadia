@@ -79,6 +79,8 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	sed -i.bak 's/127.0.0.1:26657/0.0.0.0:26657/g' "$CONFIG"
 	sed -i.bak 's/cors_allowed_origins\s*=\s*\[\]/cors_allowed_origins = ["*",]/g' "$CONFIG"
 
+	sed -i.bak 's/swagger = false/swagger = true/g' $APP_TOML
+
 	# Allocate genesis accounts (cosmos formatted addresses)
 	for KEY in "${KEYS[@]}"; do
 		cascadiad add-genesis-account "$KEY" 100000000000000000000000000aCC --keyring-backend $KEYRING --home "$HOMEDIR"
@@ -106,6 +108,8 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	if [[ $1 == "pending" ]]; then
 		echo "pending mode is on, please wait for the first block committed."
 	fi
+
+	make update-swagger-docs 
 fi
 
 # Add the MultiSig address to the genesis.json file
