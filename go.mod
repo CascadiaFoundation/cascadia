@@ -11,7 +11,7 @@ require (
 	github.com/btcsuite/btcd v0.23.3
 	github.com/btcsuite/btcd/btcutil v1.1.2
 	github.com/cosmos/cosmos-proto v1.0.0-beta.3
-	github.com/cosmos/cosmos-sdk v0.46.10
+	github.com/cosmos/cosmos-sdk v0.46.13
 	github.com/cosmos/go-bip39 v1.0.0
 	github.com/cosmos/gogoproto v1.4.6
 	github.com/cosmos/ibc-go/v6 v6.1.0
@@ -214,5 +214,11 @@ replace (
 	// use cosmos flavored protobufs
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 	// Informal Tendermint fork
-	github.com/tendermint/tendermint => github.com/informalsystems/tendermint v0.34.26
+	// github.com/tendermint/tendermint => github.com/informalsystems/tendermint v0.34.26
+	
+	// tendermint migrated to cometbft for comsmos sdk 0.46.13
+	github.com/tendermint/tendermint => github.com/cometbft/cometbft v0.34.28
+	// use updated cometbft-db
+	github.com/tendermint/tm-db => github.com/cometbft/cometbft-db v0.8.0
+	
 )
