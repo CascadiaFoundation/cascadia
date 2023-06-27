@@ -26,9 +26,9 @@ jobs:
 
       - name: setup release environment
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GO_RELEASE_GITHUB_TOKEN }}
         run: |-
-          echo 'GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}' > .release-env
+          echo 'GO_RELEASE_GITHUB_TOKEN=${{secrets.GO_RELEASE_GITHUB_TOKEN}}' > .release-env
       - name: release publish
         run: make release
 
@@ -40,4 +40,4 @@ jobs:
           files: release/*
           prerelease: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GO_RELEASE_GITHUB_TOKEN: ${{ secrets.GO_RELEASE_GITHUB_TOKEN }}
