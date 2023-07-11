@@ -9,7 +9,6 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
 	sdkmath "cosmossdk.io/math"
-	"github.com/CosmWasm/wasmd/x/wasm"
 	"github.com/cascadiafoundation/cascadia/app"
 	ante "github.com/cascadiafoundation/cascadia/app/ante"
 	"github.com/cascadiafoundation/cascadia/encoding"
@@ -96,20 +95,18 @@ func (suite *AnteTestSuite) SetupTest() {
 
 	suite.Require().NotNil(suite.app.AppCodec())
 
-	keys := suite.app.GetKeys()
 	anteHandler := ante.NewAnteHandler(ante.HandlerOptions{
 		Cdc:                suite.app.AppCodec(),
 		AccountKeeper:      suite.app.AccountKeeper,
 		BankKeeper:         suite.app.BankKeeper,
-		EvmKeeper:          suite.app.EvmKeeper,
-		StakingKeeper:      suite.app.StakingKeeper,
-		FeegrantKeeper:     suite.app.FeeGrantKeeper,
 		DistributionKeeper: suite.app.DistrKeeper,
+		EvmKeeper:          suite.app.EvmKeeper,
+		FeegrantKeeper:     suite.app.FeeGrantKeeper,
 		IBCKeeper:          suite.app.IBCKeeper,
+		StakingKeeper:      suite.app.StakingKeeper,
 		FeeMarketKeeper:    suite.app.FeeMarketKeeper,
 		SignModeHandler:    encodingConfig.TxConfig.SignModeHandler(),
 		SigGasConsumer:     ante.SigVerificationGasConsumer,
-		TxCounterStoreKey:  keys[wasm.StoreKey],
 	})
 
 	suite.anteHandler = anteHandler
